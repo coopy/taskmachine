@@ -1,0 +1,28 @@
+{
+  "name": "t",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "check": "npm run lint && npm run test",
+    "lint": "eslint --ext .js,.jsx src",
+    "start": "webpack-dev-server --hot --inline",
+    "build": "webpack"
+  },
+  "author": "Per Nilsson <per@sproutlab.com>",
+  "license": "ISC",
+  "dependencies": {
+    "babel": "5.8.23",
+    "babel-core": "5.8.25",
+    "babel-loader": "5.3.2",
+    "react": "0.14.0",
+    "react-dom": "0.14.0",
+    "webpack": "1.12.2",
+    "webpack-dev-server": "1.12.0"
+  },
+  "devDependencies": {
+    "babel-eslint": "4.1.3",
+    "eslint": "1.7.1",
+    "estraverse": "4.1.0"
+  }
+}

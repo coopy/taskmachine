@@ -1,33 +1,23 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
-import List from './list';
+import ListCollection from './list-collection';
 
-const lists = [
-  {
-    name: 'foo',
-    tasks: ['Do the thing', 'Do another thing']
-  },
-  {
-    name: '',
-    tasks: []
-  }
-];
-
-export default class Application extends React.Component {
+export class Application extends React.Component {
   render() {
+    const { props } = this;
+    const { lists } = props.listReducer;
+
     return (
       <div>
         <h1>Task Machine</h1>
-
-        {lists.map(function (list, index) {
-          return <List
-            tasks={list.tasks}
-            name={list.name}
-            key={index}
-          />
-        })}
+        <ListCollection
+          lists={lists}
+          dispatch={props.dispatch}
+        />
       </div>
     );
   }
 };
 
+export default connect((state) => state)(Application);

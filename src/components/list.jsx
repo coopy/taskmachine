@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, PropTypes } from 'react';
 import Radium from 'radium';
 
 import EditableLabel from './editable-label';
@@ -10,20 +10,16 @@ const styles = {
     border: '1px solid #666',
     padding: '1em',
     margin: '0 0 1em 0'
+  },
+  list: {
+    listStylePosition: 'inside'
   }
 };
 
 @Radium
 export default class List extends Component {
-  constructor() {
-    super();
-    this.state = {
-      editing: true
-    };
-  }
-
-  handleListNameChanged(newName) {
-    // TODO dispatch action
+  handleLabelChanged(newName) {
+    this.props.listNameChangedCallback(this.props.id, newName);
   }
 
   render() {
@@ -31,11 +27,10 @@ export default class List extends Component {
       <div style={styles.root}>
         <EditableLabel
           prompt='Enter project name'
-          // TODO pass in label from reducer
-          label={undefined}
-          labelChangedCallback={this.handleListNameChanged}
+          label={this.props.name}
+          labelChangedCallback={this.handleLabelChanged.bind(this)}
         />
-        <ul>
+        <ul style={styles.list}>
           {this.props.tasks.map(function (task, index) {
             return (
               <li key={index}>
@@ -47,4 +42,8 @@ export default class List extends Component {
       </div>
     );
   }
+};
+
+List.propTypes = {
+  listNameChangedCallback: PropTypes.func.isRequired
 };
